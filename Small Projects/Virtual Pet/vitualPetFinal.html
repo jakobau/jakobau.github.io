@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <style>
+				 .wrapper {
+					  text-align: center;
+					  margin: 0 auto;
+					  width: 100%;
+				    height: auto;
+					 }
+				 .header {
+				  margin: 0 auto;
+				  margin-top: 20px;
+				  font-size: 25px;
+				  display: inline-block;
+				  text-align: center;
+				}
+				.instructions {
+ 				  margin: 0 auto;
+ 				  margin-top: 20px;
+ 				  font-size: 25px;
+ 				  display: inline-block;
+ 				  text-align: center;
+					width: 800px;
+					height: 400px;
+ 				}
+				.imageArea {
+					display: inline-block;
+					margin: 0 auto;
+					border: 4px solid orange;
+					border-radius: 10px;
+					width: 800px;
+					height: 400px;
+					background-image: linear-gradient(yellow,orange);
+					position:relative;
+				}
+				#gifiimage {
+					display: block;
+			    margin-left: auto;
+			    margin-right: auto;
+			    width: 50%;
+				}
+				.container {
+					display: inline-block;
+					width: 300px;
+					height: 390px;
+					position: relative;
+					margin-top: 30px;
+				}
+
+				.button {
+			    background-color: orange;
+			    border: none;
+			    color: white;
+			    padding: 10px 21px;
+			    text-align: center;
+			    text-decoration: none;
+			    display: inline-block;
+			    font-size: 16px;
+					cursor: pointer;
+					border-radius: 4px;
+					margin-left: 5px;
+					margin-right: 5px;
+				}
+				.state {
+					float:right;
+					margin-top: 22px;
+					margin-left: 40px;
+					position: absolute;
+					color: darkorange;
+					font-size: 30px;
+				}
+				.food {
+					margin-top: 22px;
+					color: yellow;
+					font-size: 30px;
+				}
+				.sleep {
+					margin-top: 22px;
+					color: yellow;
+					font-size: 30px;
+				}
+				.loader {
+			    border: 3px solid white;
+			    border-top: 3px solid orange;
+					border-bottom: 3px solid orange;
+			    border-radius: 50%;
+			    width: 20px;
+			    height: 20px;
+			    animation: spin 1.5s linear infinite;
+					float: right;
+					margin-top: 25px;
+					margin-left: 0px;
+					position: absolute;
+					//display: none;
+					visibility: visable;
+				}
+
+				@keyframes spin {
+			    0% { transform: rotate(0deg); }
+			    100% { transform: rotate(360deg); }
+				}
+				.timedEvents {
+					font-size: 50px;
+					//position: absolute;
+					margin: 0; padding: 0; border: 0; outline: 0;
+				}
+    </style>
+    <title>Jakob's Virtual Pet</title>
+    <script type="text/javascript">
+					var current = '';
+
+					//pictures
+					var content = 'virtualpetimages/start.gif';
+					var happy = 'virtualpetimages/happy.gif';
+					var playful = 'virtualpetimages/fun.gif';
+					var confused = [];
+					confused[0] = 'virtualpetimages/sad3.jpg'; //sad
+					confused[1] = 'virtualpetimages/confused.jpg'; //confused
+					confused[2] = 'virtualpetimages/sad2.jpg'; //kinda sad
+					confused[3] = 'virtualpetimages/sad.gif'; //really sad
+					var hungry = 'virtualpetimages/thirsty.gif';
+					var starved = 'virtualpetimages/thirsty.gif';
+					var sleepy = 'virtualpetimages/sleepy.gif';
+					var tired = 'virtualpetimages/tired.gif';
+					var runAway = 'virtualpetimages/runaway.gif';
+
+					var tuckingIn = 'virtualpetimages/tucking.png';
+					var forceTucking = 'virtualpetimages/forceTucking.png';
+					var asleep = 'virtualpetimages/sleeping.gif';
+					var eating = 'virtualpetimages/eating.jpg';
+					var forceEating = 'virtualpetimages/forceEating.gif';
+					var poke = 'virtualpetimages/boink_image.jpg';
+					function eatingState() {
+						document.getElementById('gifimage').style.width = "300px";
+						document.getElementById('gifimage').src = eating;
+					}
+
+					function ranawayState() {
+						document.getElementById('gifimage').style.width = "300px";
+						current = 'ranaway';
+						document.getElementById('gifimage').src = runAway;
+						document.getElementById('state').innerHTML = "Run Away";
+					}
+					function tiredState() {
+						document.getElementById('gifimage').style.width = "300px";
+						current = 'tired';
+						document.getElementById('gifimage').src = tired;
+						document.getElementById('state').innerHTML = "Tired";
+					}
+					function sleepyState() {
+						document.getElementById('gifimage').style.width = "300px";
+						current = 'sleepy';
+						document.getElementById('gifimage').src = sleepy;
+						document.getElementById('state').innerHTML = "Sleepy";
+					}
+					function starvedState() {
+						document.getElementById('gifimage').style.width = "300px";
+						current = 'starved';
+						document.getElementById('gifimage').src = starved;
+						document.getElementById('state').innerHTML = "Starving";
+					}
+					function hungryState() {
+						document.getElementById('gifimage').style.width = "300px";
+						current = 'hungry';
+						document.getElementById('gifimage').src = hungry;
+						document.getElementById('state').innerHTML = "Hungry";
+					}
+					function playfulState() {
+						document.getElementById('gifimage').style.width = "300px";
+						current = 'playful';
+						document.getElementById('gifimage').src = playful;
+						document.getElementById('state').innerHTML = "Playful";
+					}
+					function contentState() {
+						document.getElementById('gifimage').style.width = "250px";
+						current = 'content';
+						document.getElementById('gifimage').src = content;
+						document.getElementById('state').innerHTML = "Content :)";
+					}
+					function happyState() {
+						current = 'happy';
+						document.getElementById('gifimage').src = happy;
+						document.getElementById('state').innerHTML = "Happy";
+					}
+					function angryState(x) {
+						current = 'angry';
+						document.getElementById('gifimage').src = confused[x];
+						document.getElementById('state').innerHTML = "Angry";
+					}
+
+					function sleepIt() {
+						if(current=='content' || current=='playful') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = forceTucking;
+							document.getElementById('state').innerHTML = "Forced Nap...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false);
+								//50-50% chance
+								if(Math.random() >= 0.5) {angryState(0);}
+								else {happyState();}
+							}, 1500);
+
+						}else if (current=='happy') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = forceTucking;
+							document.getElementById('state').innerHTML = "Forced Nap...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false);
+								//50-50% chance
+								if(Math.random() >= 0.5) {playfulState(); }
+								else {angryState(1);}
+							}, 1500);
+
+						}else if(current=='sleepy') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = asleep;
+							document.getElementById('state').innerHTML = "Sleeping...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false); happyState();  	}, 1500);
+
+						}else if(current=='tired') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = asleep;
+							document.getElementById('state').innerHTML = "Sleeping...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false);contentState();	  }, 1500);
+
+						}else if(current=='hungry') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = forceTucking;
+							document.getElementById('state').innerHTML = "Forced Nap...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false);
+								//50-50% chance
+								if(Math.random() >= 0.5) {happyState();  }
+								else {starvedState();}
+							}, 1500);
+
+						}else if(current=='starved') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = forceTucking;
+							document.getElementById('state').innerHTML = "Forced Nap...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false);
+								//50-50% chance
+								if(Math.random() >= 0.5) {ranawayState();  }
+								else {angryState(3);  }
+							}, 1500);
+
+						}else if(current=='angry') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = forceTucking;
+							document.getElementById('state').innerHTML = "Forced Nap...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false);
+								//50-50% chance
+								if(Math.random() >= 0.5) {happyState();}
+								else {ranawayState(3);}
+							}, 1500);
+
+						}else if(current=='ranaway') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = forceTucking;
+							document.getElementById('state').innerHTML = "Forced Nap...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false);
+								//50-50% chance
+								if(Math.random() >= 0.5) {contentState();}
+								else {angryState(2);}
+							}, 1500);
+						}
+					}
+
+					function playIt() {
+						if(current=='tired' || current=='starved') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = poke;
+							document.getElementById('state').innerHTML = "Trying to Play...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false); ranawayState();  	}, 1500);
+
+						}else if (current=='happy' || current=='angry') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = playful;
+							document.getElementById('state').innerHTML = "Yay!!...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false); playfulState();	}, 1500);
+
+						}else if(current=='content') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = playful;
+							document.getElementById('state').innerHTML = "So FUN!...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false); happyState();		}, 1500);
+
+						}else if(current=='sleepy') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = sleepy;
+							document.getElementById('state').innerHTML = "Too much fun...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false); tiredState();		}, 1500);
+
+						}else if(current=='hungry') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = poke;
+							document.getElementById('state').innerHTML = "Forced fun...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false); starvedState();	}, 1500);
+
+						}else if(current=='playful') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = playful;
+							document.getElementById('state').innerHTML = "That was FUN...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false); sleepyState();		}, 1500);
+
+						}else if(current=='ranaway') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = playful;
+							document.getElementById('state').innerHTML = "Fun?...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false);
+								//50-50% chance
+								if(Math.random() >= 0.5) {contentState();}
+								else {angryState(0);}
+							}, 1500);
+						}
+					}
+
+					function feedIt() {
+						if(current=='content' || current=='playful') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							eatingState();
+							document.getElementById('state').innerHTML = "Eating?...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false);
+								//50-50% chance
+								if(Math.random() >= 0.5) {angryState(0);}
+								else {happyState();}
+							}, 1500);
+
+						}else if (current=='happy') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							eatingState();
+							document.getElementById('state').innerHTML = "Eating?...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false);
+								//50-50% chance
+								if(Math.random() >= 0.5) {playfulState();}
+								else {angryState(1);}
+							}, 1500);
+
+						}else if(current=='sleepy') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = forceEating;
+							document.getElementById('state').innerHTML = "Eating?...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false);
+								//50-50% chance
+								if(Math.random() >= 0.5) {happyState();  }
+								else {tiredState();}
+							}, 1500);
+
+						}else if(current=='tired') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = forceEating;
+							document.getElementById('state').innerHTML = "Eating?...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false);
+								//50-50% chance
+								if(Math.random() >= 0.5) {ranawayState();  }
+								else {angryState();  }
+							}, 1500);
+
+						}else if(current=='hungry') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = eating;
+							document.getElementById('state').innerHTML = "Yummy...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false);happyState();	 	}, 1500);
+
+						}else if(current=='starved') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = eating;
+							document.getElementById('state').innerHTML = "Finally...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false);contentState();  		}, 1500);
+
+						}else if(current=='angry') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = forceEating;
+							document.getElementById('state').innerHTML = "Forced Snack...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false);
+								//50-50% chance
+								if(Math.random() >= 0.5) {happyState();}
+								else {ranawayState();}
+							}, 1500);
+
+						}else if(current=='ranaway') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = forceEating;
+							document.getElementById('state').innerHTML = "Forced Snack...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false);
+								//50-50% chance
+								if(Math.random() >= 0.5) {contentState();}
+								else {angryState(2);}
+							}, 1500);
+						}
+					}
+
+					function pokeIt() {
+						if(current=='content' || current=='angry') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = poke;
+							document.getElementById('state').innerHTML = "Poking...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false); happyState();		}, 1500);
+
+						} else if(current=='tired' || current=='starved') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = poke;
+							document.getElementById('state').innerHTML = "Poking...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false); contentState();	  }, 1500);
+
+						} else if(current=='sleepy') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = poke;
+							document.getElementById('state').innerHTML = "Poking...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false); tiredState();}, 1500);
+
+						} else if(current=='happy') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = poke;
+							document.getElementById('state').innerHTML = "Poking...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false); playfulState();}, 1500);
+
+						} else if(current=='playful') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = poke;
+							document.getElementById('state').innerHTML = "Poking...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false); sleepyState();			}, 1500);
+
+						} else if(current=='hungry') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = poke;
+							document.getElementById('state').innerHTML = "Poking...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false); starvedState();		}, 1500);
+
+						} else if(current=='ranaway') {
+							document.getElementById("buttonDiv").style.visibility = "hidden";
+							document.getElementById('gifimage').src = poke;
+							document.getElementById('state').innerHTML = "Poking...";
+							loading(true);
+							setTimeout(function myFunction(){loading(false);
+								//50-50% chance
+								if(Math.random() >= 0.5) {contentState();}
+								else {angryState(3);}
+							}, 1500);
+						}
+					}
+
+					//initial gif image time to load
+					function init() {
+						//add onclick to all buttons
+						document.getElementById('feedButton').addEventListener('click', function(){ feedIt(); });
+						document.getElementById('pokeButton').addEventListener('click', function(){ pokeIt(); });
+						document.getElementById('playButton').addEventListener('click', function(){ playIt(); });
+						document.getElementById('sleepButton').addEventListener('click', function(){ sleepIt(); });
+
+						//initial state: contentState
+						document.getElementById('state').innerHTML="Starting...";
+						document.getElementById("buttonDiv").style.visibility="hidden";
+						setTimeout(function myFunction(){loading(false);
+							current = 'content';
+							document.getElementById('state').innerHTML="Content";
+						}, 2000);
+
+						//randomNeed every 20 seconds
+						setInterval(function(){randomNeed();}, 20000);
+					}
+
+					function randomNeed() {
+						//Will only run if not hungry or sleepy
+						if(current=='sleepy' || current=='tired' || current=='hungry' || current=='starved') {
+							console.log("already sleepy or hungry");
+						} else {
+							if(Math.random() >= 0.5) {
+									document.getElementById("buttonDiv").style.visibility = "hidden";
+									document.getElementById('gifimage').src = hungry;
+									current='hungry';
+									document.getElementById('state').innerHTML = "Random Hunger!...";
+									loading(true);
+									setTimeout(function myFunction(){loading(false); hungryState();	}, 2000);
+							} else {
+									document.getElementById("buttonDiv").style.visibility = "hidden";
+									document.getElementById('gifimage').src = sleepy;
+									current='sleepy';
+									document.getElementById('state').innerHTML = "Random NapTime!...";
+									loading(true);
+									setTimeout(function myFunction(){loading(false); sleepyState();	}, 2000);
+						  }
+						}
+					}
+
+					//loading the gif image. hids buttons until finished
+					function loading(x) {
+							if(x==false) {
+								document.getElementById('loader').style.visibility="hidden";
+								document.getElementById("buttonDiv").style.visibility="initial";
+							} else if(x==true) {
+								document.getElementById('loader').style.visibility="initial";
+							}
+					}
+
+    </script>
+  </head>
+  <body onload="init()">
+		<div class="wrapper">
+			<div class="header">
+				<strong>
+					CS 164 | Project #3<br>
+					Virtual Pet Gudetama by Jakob Au
+				</strong><br><br>
+			</div><br>
+			<div class="imageArea">
+				<div class="container" >
+					<img id="gifimage" src="virtualpetimages/start.gif">
+				</div>
+				<b><a class="state" id="state"></a></b>
+				<a class="loader" id="loader"></a>
+			</div><br>
+			<div id="buttonDiv">
+				<br>
+				<button class="button" id="feedButton">Feed</button>
+				<button class="button" id="pokeButton">Poke</button>
+				<button class="button" id="playButton">Play</button>
+				<button class="button" id="sleepButton">Sleep</button>
+			</div>
+			<hr><br>
+			Here is the user <a href="virtualpet_doc.pdf">GUIDE</a><br>
+			And here is the <a href="developersNotes.pdf">DEVELOPERS NOTES</a><br>
+			<div class="instructions">
+				<b>Backstory</b> <br>
+				After World War 10 in the year 3018, a large nuclear radiation wave
+				passes over your backyard chicken coop, causing strange mutations in
+				the eggs. One morning, unaware of the disturbance, you gather the
+				contaminated eggs and head inside the house. As you crack open the
+				first egg, the egg yolk jumps out onto the table! Catching your breath,
+				you observe the creature laying there. You decide to raise it!
+			</div>
+		</div>
+  </body>
+</html>
