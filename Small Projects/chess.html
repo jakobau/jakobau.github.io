@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<!--
+(1) DONE
+(2) DONE
+(3)
+(4)
+(5)
+-->
+<html>
+  <head>
+    <style>
+      .chessboard {
+        height: 50px;
+        width: 50px;
+        font-size: 30px;
+        text-align: center;
+      }
+      .boardNumbers {
+        height: 25px;
+        width: 50px;
+        font-size: 20px;
+        text-align: center;
+      }
+      .boardLetters {
+        height: 50px;
+        width: 50px;
+        font-size: 20px;
+        text-align: center;
+      }
+      .intructions {
+        float: right;
+        font-size: 20px;
+        width: 500px;
+        height: 650px;
+        padding-right: 20px;
+      }
+      .chessboard:hover{
+        background-color: yellow;
+      }
+    </style>
+    <script>
+    //global variables
+      var selected = false;
+      var selectedID = ' ';
+      var whiteNum = ['♖','♘','♗','♔','♕','♙'];
+      var blackNum = ['♜','♞','♝','♚','♛','♟'];
+      var board = [[9814,9816,9815,9813,9812,9815,9816,9814],
+      [9817,9817,9817,9817,9817,9817,9817,9817],
+      [32,32,32,32,32,32,32,32],
+      [32,32,32,32,32,32,32,32],
+      [32,32,32,32,32,32,32,32],
+      [32,32,32,32,32,32,32,32],
+      [9823,9823,9823,9823,9823,9823,9823,9823],
+      [9820,9822,9821,9818,9819,9821,9822,9820]];
+      var letter = ["a","b","c","d","e","f","g","h"];
+
+      //onclick move piece
+      function move(x) {
+        document.getElementById("demo").innerHTML = ' ';
+        console.log(x.id);
+        console.log(selected);
+        console.log(selectedID);
+        var y = document.getElementById(x.id);
+        var foo,foo2,idletter,next_idletter='hello',i=0,cNum;
+        var letterstring='',backgroundcolor='';
+
+  //--------when first selecting a piece
+        if(selected==false) {
+          selected = true;
+          y.style.color = "red";
+          selectedID = x.id;
+
+          //PAWN rules
+          if(document.getElementById(selectedID).innerHTML=='♙') {
+
+            foo = parseInt(selectedID.substring(1,2))+1;
+            foo2 = foo+1;
+            idletter=String(selectedID.substring(0,1));
+
+            //finding the right letter
+            while(letter[i]) {
+              if(idletter==String(letter[i])) {
+                next_idletter=letter[i+1];
+              }
+              i++;
+            }
+            letterstring=''+next_idletter+foo+next_idletter;
+
+            //test what color background is
+            if(document.getElementById(letterstring).style.backgroundColor=='fafafa'){
+              backgroundcolor='white';
+            } else if(document.getElementById(letterstring).style.backgroundColor=="#d3d3d3") {
+              backgroundcolor='black';
+            }
+
+            document.getElementById(letterstring).style.backgroundColor="red";
+
+            console.log(backgroundcolor);
+            console.log(document.getElementById(idletter+foo+idletter).style.bgcolor);
+            console.log(document.getElementById('c4c').style.bgcolor);
+            console.log(next_idletter+foo);
+          }
+
+
+  //---------already selected a spot and want to move.
+        }
+        else if(selected==true && document.getElementById(selectedID).innerHTML!=' ') {
+
+          var i=0,o=0,currentSide='',toSide='';
+
+          //check if current spot is enemy or ally
+          while(whiteNum[i] && blackNum[i]) {
+            if(document.getElementById(selectedID).innerHTML==whiteNum[i]){
+              currentSide='white';
+            } else if(document.getElementById(selectedID).innerHTML==blackNum[i]){
+              currentSide='black';
+            }
+            i++
+          }
+          //check if designated spot is enemy or ally
+          while(whiteNum[o] && blackNum[o]) {
+            if(document.getElementById(x.id).innerHTML==whiteNum[o]){
+              toSide='white';
+            } else if(document.getElementById(x.id).innerHTML==blackNum[o]){
+              toSide='black';
+            }
+            o++
+          }
+
+          console.log(currentSide);
+          console.log(toSide);
+
+          //players cant kill themselves
+          if(currentSide=='white' && toSide=='white') {
+            document.getElementById("demo").innerHTML = 'You cant kill yourself...';
+            document.getElementById(selectedID).style.color = "black";
+
+          }
+          else if(currentSide=='white' && toSide=='black'){
+            document.getElementById("demo").innerHTML = 'Nice White, your killing it!';
+            document.getElementById(x.id).innerHTML = document.getElementById(selectedID).innerHTML;
+            document.getElementById(selectedID).innerHTML = " ";
+            document.getElementById(selectedID).style.color = "black";
+
+          }
+          else if(currentSide=='black' && toSide=='black') {
+            document.getElementById("demo").innerHTML = 'You cant kill yourself...';
+            document.getElementById(selectedID).style.color = "black";
+
+          }
+          else if(currentSide=='black' && toSide=='white') {
+            document.getElementById("demo").innerHTML = 'Nice Black, your killing it!';
+            document.getElementById(x.id).innerHTML = document.getElementById(selectedID).innerHTML;
+            document.getElementById(selectedID).innerHTML = " ";
+            document.getElementById(selectedID).style.color = "black";
+          }
+          else {
+            document.getElementById(x.id).innerHTML = document.getElementById(selectedID).innerHTML;
+            document.getElementById(selectedID).innerHTML = " ";
+            document.getElementById(selectedID).style.color = "black";
+          }
+
+          //set background back to original color
+          if(backgroundcolor=='white'){
+            document.getElementById(letterstring).style.backgroundColor=="#fafafa";
+          } else if(backgroundcolor=='black') {
+            document.getElementById(letterstring).style.backgroundColor=="#d3d3d3";
+          }
+
+          //reset
+          selected = false;
+          selectedID = ' ';
+          letterstring='';
+          backgroundcolor='';
+        }
+        else {
+          document.getElementById("demo").innerHTML = 'that is a blank spot...';
+
+          //reset
+          selected = false;
+          selectedID = ' ';
+          letterstring='';
+          backgroundcolor='';
+        }
+        console.log(selected);
+      }
+
+      //drawboard
+      function drawboard() {
+      	var r,c,cNum,color,pNum;
+
+        document.writeln('<center><table border="1px">');
+
+        //Top board number 1-8
+        for(p = 0; p < 10; ++p) {
+          pNum = p;
+          if(p==0 || p==9) {
+            document.writeln('<td bgcolor="white" class="boardNumbers"><a> </a></td>');
+          }
+          else {
+            document.writeln('<td style="color:white;" bgcolor="black" class="boardNumbers"><a>'+pNum+'</a></td>');
+          }
+        }
+
+      	for(r = 0; r < 8; ++r) {
+      		document.writeln('<tr>');
+
+          //Left letters for table
+          document.writeln('<td style="color:white;" bgcolor="black" class="boardLetters">'+letter[r]+'</td>');
+
+          //chessboard
+          for(c = 0; c < 8; ++c) {
+
+            if (c%2==r%2) {
+              color = "fafafa";
+            }
+            else{
+              color = "d3d3d3";
+            }
+
+            cNum = c+1;
+            document.writeln('<td id="'+letter[r]+cNum+letter[r]+'" onclick="move('+letter[r]+cNum+')" class="chessboard" bgcolor=#'+color+'><center>'+'<a id="'+letter[r]+cNum+'" size=4>&#'+board[r][c]+';</a></td>');
+      		}
+
+          //Right blanks for table
+          document.writeln('<td style="color:white;" bgcolor="black" class="boardLetters"><a>'+letter[r]+'</a></td>');
+      		document.writeln('</tr>');
+      	}
+        //Bottom blanks
+        for(p = 0; p < 10; ++p) {
+          pNum = p;
+          if(p==0 || p==9) {
+            document.writeln('<td bgcolor="white" class="boardNumbers"><a> </a></td>');
+          }
+          else {
+            document.writeln('<td style="color:white;" bgcolor="black" class="boardNumbers"><a>'+pNum+'</a></td>');
+          }
+        }
+      	document.writeln('</table></center>');
+      }
+      //manually enter position
+      function enterPosition() {
+        var input = document.getElementById("myTextarea").value;
+
+        var current = input.substring(0,2);
+        var move = input.substring(2,4);
+        var currentvalue = document.getElementById(current).innerHTML;
+
+        if(currentvalue == " ") {
+          document.getElementById("demo").innerHTML = "There is no piece in that spot Please enter another move!";
+        }
+        else{
+          var x = document.getElementById(current).innerHTML;
+          document.getElementById(move).innerHTML = x;
+          document.getElementById(current).innerHTML = " ";
+          document.getElementById("demo").innerHTML = " ";
+        }
+      }
+    </script>
+  </head>
+<body>
+  <!-- Chess Board -->
+  <div class="intructions">
+        <center><p>
+          <strong>Intructions</strong><br>
+          To move a piece, enter piece current position and move position.<br>
+          For example: 'b1c1' moves the left-most white pawn forward one.
+        </p>
+  </div>
+  <div>
+    <center><p>Chess</p>
+    <table border="1px">
+    <script>drawboard();</script>
+    <center>
+    <textarea rows="4" cols="50" id="myTextarea"></textarea><br>
+    <button onclick="enterPosition()">Submit</button><br>
+    <a id="demo"></a>
+  </div>
+
+</body>
+</html>
