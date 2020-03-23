@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!-- public/index.html -->
+<html>
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>IMDrexel</title>
+
+    <link rel="stylesheet" href="css/menu.css">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+  </head>
+  <body>
+
+    <!-- menu -->
+    <nav class="navbar navbar-light bg-primary justify-content-between border-bottom" style="background-color: #f2be54 !important;">
+      <a class="navbar-brand" href="dashboard.html">IMDrexel</a>
+      <a class="navbar-brand" href="profile.html">@Username <img src="./icons/avatar.jpg" width="50" height="30" alt=""></a>
+    </nav>
+
+    <!-- main content -->
+    <div class="container-fluid p-0">
+      <div class="row">
+        <!-- sidebar -->
+        <div class="col-fixed pr-0">
+            <div class="navbar navbar-light bg-white border-right sticky-top p-0" >
+              <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <div class="navbarOne p-2">
+                  <a class="nav-link text-secondary" href="dashboard.html" role="tab" aria-selected="false">Dashboard</a>
+                  <a class="nav-link text-secondary" href="profile.html" role="tab" aria-selected="false">Profile</a>
+                  <a class="nav-link text-secondary" href="myteams.html" role="tab" aria-selected="false">My Teams</a>
+                  <a class="nav-link text-secondary" href="jointeam.html" role="tab" aria-selected="false">Join Team</a>
+                  <a class="nav-link text-secondary" href="new.html" role="tab" aria-selected="false">New to IMDrexel?</a>
+                  <a class="nav-link text-secondary" href="rules.html" role="tab" aria-selected="false">Rules and Regulations</a>
+                  <a class="nav-link text-secondary active" href="#" role="tab" aria-selected="true">Upcoming Sports</a>
+                  <a class="nav-link text-secondary" href="contact.html" role="tab" aria-selected="false">Contact Organizers</a>
+                </div>
+                <div class="navbarTwo" style="display:none;">
+                  <a class="nav-link text-secondary" href="dashboard.html" role="tab" aria-selected="false"><img src="./icons/dash.png" width="20" height="auto"></a>
+                  <a class="nav-link text-secondary" href="profile.html" role="tab" aria-selected="false"><img src="./icons/profile.jpg" width="20" height="auto"></a>
+                  <a class="nav-link text-secondary" href="myteams.html" role="tab" aria-selected="false"><img src="./icons/team.png" width="20" height="auto"></a>
+                  <a class="nav-link text-secondary" href="jointeam.html" role="tab" aria-selected="false"><img src="./icons/jointeam.png" width="20" height="auto"></a>
+                  <a class="nav-link text-secondary" href="new.html" role="tab" aria-selected="false"><img src="./icons/new.png" width="20" height="auto"></a>
+                  <a class="nav-link text-secondary" href="rules.html" role="tab" aria-selected="false"><img src="./icons/rules.png" width="20" height="auto"></a>
+                  <a class="nav-link text-secondary active" href="#" role="tab" aria-selected="true"><img src="./icons/league.png" width="20" height="auto"></a>
+                  <a class="nav-link text-secondary" href="contact.html" role="tab" aria-selected="false"><img src="./icons/contact.png" width="20" height="auto"></a>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <!-- under nav bar -->
+        <div class="col pl-0">
+          <nav aria-label="breadcrumb" class="sticky-top">
+            <ol class="breadcrumb" style="border-radius: 0;">
+              <li class="breadcrumb-item"><a href="index.html" style="color:white;">Dashboard</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Profile</li>
+            </ol>
+          </nav>
+
+
+          <main class="container-fluid">
+            profile page
+          </main>
+          <br><br> <!-- delete brs later -->
+        </div>
+      </div>
+    </div>
+
+    <!--footer-->
+    <footer class="footer-copyright text-center py-3 border-top">© 2020 Copyright:
+      <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+    </footer>
+
+  </body>
+  <script src='js/profile.js'></script>
+</html>

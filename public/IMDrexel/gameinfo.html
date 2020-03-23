@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!-- public/index.html -->
+<html>
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>IMDrexel</title>
+
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/gameinfo.css">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+  </head>
+  <body>
+
+    <!-- menu -->
+    <nav class="navbar navbar-light bg-primary justify-content-between border-bottom" style="background-color: #f2be54 !important;">
+      <a class="navbar-brand" href="index.html">IMDrexel</a>
+      <a class="navbar-brand" href="profile.html">@Username <img src="./icons/avatar.jpg" width="50" height="30" alt=""></a>
+    </nav>
+
+    <!-- main content -->
+    <div class="container-fluid p-0">
+      <div class="row">
+        <!-- sidebar -->
+        <div class="col-fixed pr-0">
+            <div class="navbar navbar-light bg-white border-right sticky-top p-0" >
+              <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <div class="navbarOne p-2">
+                  <a class="nav-link text-secondary" href="dashboard.html" role="tab" aria-selected="false">Dashboard</a>
+                  <a class="nav-link text-secondary" href="profile.html" role="tab" aria-selected="false">Profile</a>
+                  <a class="nav-link text-secondary" href="myteams.html" role="tab" aria-selected="false">My Teams</a>
+                  <a class="nav-link text-secondary" href="jointeam.html" role="tab" aria-selected="false">Join Team</a>
+                  <a class="nav-link text-secondary" href="new.html" role="tab" aria-selected="false">New to IMDrexel?</a>
+                  <a class="nav-link text-secondary" href="rules.html" role="tab" aria-selected="false">Rules and Regulations</a>
+                  <a class="nav-link text-secondary" href="leagues.html" role="tab" aria-selected="false">Upcoming Sports</a>
+                  <a class="nav-link text-secondary" href="contact.html" role="tab" aria-selected="false">Contact Organizers</a>
+                </div>
+                <div class="navbarTwo" style="display:none;">
+                  <a class="nav-link text-secondary" href="dashboard.html" role="tab" aria-selected="false"><img src="./icons/dash.png" width="20" height="auto"></a>
+                  <a class="nav-link text-secondary" href="profile.html" role="tab" aria-selected="false"><img src="./icons/profile.jpg" width="20" height="auto"></a>
+                  <a class="nav-link text-secondary" href="myteams.html" role="tab" aria-selected="false"><img src="./icons/team.png" width="20" height="auto"></a>
+                  <a class="nav-link text-secondary" href="jointeam.html" role="tab" aria-selected="false"><img src="./icons/jointeam.png" width="20" height="auto"></a>
+                  <a class="nav-link text-secondary" href="new.html" role="tab" aria-selected="false"><img src="./icons/new.png" width="20" height="auto"></a>
+                  <a class="nav-link text-secondary" href="rules.html" role="tab" aria-selected="false"><img src="./icons/rules.png" width="20" height="auto"></a>
+                  <a class="nav-link text-secondary" href="leagues.html" role="tab" aria-selected="false"><img src="./icons/league.png" width="20" height="auto"></a>
+                  <a class="nav-link text-secondary" href="contact.html" role="tab" aria-selected="false"><img src="./icons/contact.png" width="20" height="auto"></a>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <!-- under nav bar -->
+        <div class="col pl-0">
+          <nav aria-label="breadcrumb" class="sticky-top">
+            <ol class="breadcrumb" style="border-radius: 0;">
+              <li class="breadcrumb-item"><a href="index.html" style="color:white;">Dashboard</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Game ID: <span id="bread"></span></li>
+            </ol>
+          </nav>
+
+          <div class="d-flex justify-content-around flex-wrap">
+            <div class="border p-5">
+              <h3><a href="jointeam.html">Basketball 5v5 Mens League</a></h3>
+              <h4>5:00PM Tuesday, May 4</h4>
+              <h4><a href="map.html">@Court1</a></h4>
+              <h4><a href="viewteam.html?teamid=2&page=gameinfo&gameid=3">MY TEAM</a> VS <a href="viewteam.html?teamid=3&page=gameinfo&gameid=3">KILLERS</a></h4>
+            </div>
+          </div>
+
+          <main class="d-flex justify-content-around flex-wrap">
+            <!--home and away team user list-->
+            <div style="width:85%;max-width:900px;min-width:200px;" class="d-flex justify-content-around flex-wrap">
+              <div class="col-6 float-left flex" id="hometeam">
+                <h2>Home Team: Killers</h2>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="table1">
+                    <tr>
+                      <th scope="row"><a href="#">Jake Au</a></th>
+                      <td>Captain</td>
+                    </tr>
+                    <tr>
+                      <th scope="row"><a href="#">Vincent Saverese</a></th>
+                      <td>Member</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="border p-2 d-flex justify-content-center">
+                  <div>
+                    <h6 id="record1">record 7|0|0</h6>
+                    <h6 id="pastGames1">Past games: null</h6>
+                    <h6 id="totalPlayers1">Total Players: 10</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 float-right" id="awayteam">
+                <h2>Home Team: Angels</h2>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="table2">
+                    <tr>
+                      <th scope="row"><a href="#">Jake Au</a></th>
+                      <td>Captain</td>
+                    </tr>
+                    <tr>
+                      <th scope="row"><a href="#">Vincent Saverese</a></th>
+                      <td>Member</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="border p-2 d-flex justify-content-center">
+                  <div>
+                    <h6 id="record2">record 7|0|0</h6>
+                    <h6 id="record2">Past games: null</h6>
+                    <h6 id="record2">Total Players: 10</h6>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            </span>
+          </main>
+          <br><br> <!-- delete brs later -->
+        </div>
+      </div>
+    </div>
+
+    <!--footer-->
+    <footer class="footer-copyright text-center py-3 border-top">© 2020 Copyright:
+      <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+    </footer>
+
+  </body>
+  <script src='js/gameinfo.js'></script>
+</html>
